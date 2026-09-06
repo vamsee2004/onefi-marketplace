@@ -1,91 +1,106 @@
 # OneFi Marketplace
 
-A Spring Boot based e-commerce marketplace application for browsing products, viewing EMI plans, and placing and managing orders.
+A full-stack marketplace application built using **Spring Boot, Java, MySQL, HTML, CSS, and JavaScript**.
 
-## Features
+The application provides product management, product variants, EMI plans, and order management through REST APIs, along with a simple web-based frontend.
+
+---
+
+## 🚀 Features
 
 - Product management
-- Product variant management
-- EMI plan management
-- Product-wise EMI options
-- Order creation
-- View all orders
-- Update orders
-- Delete orders
-- Responsive web interface
-- MySQL database integration
-- RESTful APIs
+  - Create product
+  - View all products
+  - View product by ID
+  - Update product
+  - Delete product
 
-## Technologies Used
+- Product Variant management
+  - Create variant
+  - View variants
+  - View variant by ID
+  - Update variant
+  - Delete variant
 
-- Java
+- EMI Plan management
+  - Create EMI plan
+  - View all EMI plans
+  - View EMI plan by ID
+  - Get EMI plans by product
+  - Update EMI plan
+  - Delete EMI plan
+
+- Order management
+  - Place order
+  - View all orders
+  - View order by ID
+  - Update order
+  - Delete order
+
+- Frontend
+  - Product listing
+  - Product details
+  - EMI selection
+  - Place order
+  - My Orders
+  - Update order
+  - Delete order
+
+---
+
+## 🛠️ Technologies Used
+
+### Backend
+- Java 25
 - Spring Boot
+- Spring Web
 - Spring Data JPA
 - Hibernate
-- MySQL
 - Maven
-- HTML
-- CSS
+
+### Database
+- MySQL 8
+
+### Frontend
+- HTML5
+- CSS3
 - JavaScript
+
+### Development Tools
+- Eclipse
 - Git
 - GitHub
+- PowerShell
 
-## Project Structure
+---
+
+## 📁 Project Structure
 
 ```text
-
-src/main/java/com/onefi/marketplace
-
-├── controller
-
-│   ├── ProductController.java
-
-│   ├── ProductVariantController.java
-
-│   ├── EmiPlanController.java
-
-│   └── OrderController.java
-
+marketplace/
 │
-
-├── entity
-
-│   ├── Product.java
-
-│   ├── ProductVariant.java
-
-│   ├── EmiPlan.java
-
-│   └── Order.java
-
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── onefi/
+│   │   │           └── marketplace/
+│   │   │               ├── controller/
+│   │   │               ├── entity/
+│   │   │               ├── repository/
+│   │   │               ├── service/
+│   │   │               └── MarketplaceApplication.java
+│   │   │
+│   │   └── resources/
+│   │       ├── static/
+│   │       │   └── index.html
+│   │       ├── application-example.properties
+│   │       └── application.properties
+│   │
+│   └── test/
 │
-
-├── repository
-
-│   ├── ProductRepository.java
-
-│   ├── ProductVariantRepository.java
-
-│   ├── EmiPlanRepository.java
-
-│   └── OrderRepository.java
-
-│
-
-└── service
-
-&#x20;   ├── ProductService.java
-
-&#x20;   ├── ProductVariantService.java
-
-&#x20;   ├── EmiPlanService.java
-
-&#x20;   └── OrderService.java
-
-
-
-src/main/resources
-
-└── static
-
-&#x20;   └── index.html
+├── pom.xml
+├── mvnw
+├── mvnw.cmd
+├── .gitignore
+└── README.md
