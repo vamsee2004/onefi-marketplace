@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>OneFi Marketplace</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #111;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background-color: #111827;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #d1d5db;
+            font-size: 17px;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        /* =========================
+           SECTION TITLE
+        ========================= */
+
+        .section-title {
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #666;
+        }
+
+        /* =========================
+           PRODUCT GRID
+        ========================= */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 20px;
+        }
+
+        /* =========================
+           PRODUCT CARD
+        ========================= */
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.1);
+
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .product-card h3 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .product-card p {
+            margin: 9px 0;
+        }
+
+        .price {
+            font-size: 23px;
+            font-weight: bold;
+            color: #008a2e;
+        }
+
+        /* =========================
+           GENERAL BUTTON
+        ========================= */
+
+        button {
+            border: none;
+            border-radius: 6px;
+            padding: 11px 18px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           VIEW PRODUCT BUTTON
+        ========================= */
+
+        .view-btn {
+            background-color: #2563eb;
+            color: white;
+            margin-top: 12px;
+        }
+
+        .view-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* =========================
+           PRODUCT DETAILS
+        ========================= */
+
+        #productDetails {
+            margin-top: 30px;
+        }
+
+        .details-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-card h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .details-card p {
+            margin: 10px 0;
+        }
+
+        /* =========================
+           EMI SECTION
+        ========================= */
+
+        .emi-section {
+            margin-top: 25px;
+        }
+
+        .emi-section h3 {
+            margin-bottom: 15px;
+        }
+
+        .emi-card {
+            background-color: #f8fafc;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            padding: 18px;
+
+            margin-bottom: 15px;
+        }
+
+        .emi-card p {
+            margin: 7px 0;
+        }
+
+        .select-emi-btn {
+            background-color: #2563eb;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .select-emi-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* =========================
+           CLOSE BUTTON
+        ========================= */
+
+        .close-btn {
+            background-color: #6b7280;
+            color: white;
+            margin-top: 15px;
+        }
+
+        .close-btn:hover {
+            background-color: #4b5563;
+        }
+
+        /* =========================
+           SELECTED EMI
+        ========================= */
+
+        #selectedEmi {
+            margin-top: 30px;
+        }
+
+        .selected-card {
+            background-color: #e8f5e9;
+
+            border: 1px solid #a5d6a7;
+
+            border-radius: 10px;
+
+            padding: 25px;
+        }
+
+        .selected-card h2 {
+            color: #087f23;
+            margin-top: 0;
+        }
+
+        .selected-card p {
+            margin: 10px 0;
+        }
+
+        /* =========================
+           PLACE ORDER BUTTON
+        ========================= */
+
+        .place-order-btn {
+            background-color: #087f23;
+            color: white;
+            margin-top: 15px;
+            font-size: 17px;
+        }
+
+        .place-order-btn:hover {
+            background-color: #05651c;
+        }
+
+        /* =========================
+           ORDER SUCCESS
+        ========================= */
+
+        #orderSuccess {
+            margin-top: 30px;
+        }
+
+        .success-card {
+            background-color: #e8f5e9;
+
+            border: 1px solid #a5d6a7;
+
+            border-radius: 10px;
+
+            padding: 25px;
+        }
+
+        .success-card h2 {
+            color: #087f23;
+            margin-top: 0;
+        }
+
+        .success-card p {
+            margin: 10px 0;
+        }
+
+        /* =========================
+           MY ORDERS
+        ========================= */
+
+        .orders-section {
+            margin-top: 40px;
+            margin-bottom: 40px;
+
+            padding: 25px;
+
+            background-color: white;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .orders-section h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .orders-section > p {
+            color: #555;
+        }
+
+        /* =========================
+           VIEW ORDERS BUTTON
+        ========================= */
+
+        .orders-btn {
+            background-color: #2563eb;
+            color: white;
+
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .orders-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* =========================
+           ORDER CARD
+        ========================= */
+
+        .order-card {
+            margin-top: 20px;
+
+            padding: 22px;
+
+            background-color: #f8fafc;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 8px;
+        }
+
+        .order-card h3 {
+            margin-top: 0;
+
+            color: #2563eb;
+
+            font-size: 23px;
+        }
+
+        .order-card p {
+            margin: 9px 0;
+        }
+
+        /* =========================
+           ORDER STATUS
+        ========================= */
+
+        .order-status {
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 5px;
+
+            background-color: #fff3cd;
+
+            color: #856404;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           UPDATE BUTTON
+        ========================= */
+
+        .update-order-btn {
+            background-color: #f59e0b;
+            color: white;
+
+            margin-right: 10px;
+        }
+
+        .update-order-btn:hover {
+            background-color: #d97706;
+        }
+
+        /* =========================
+           DELETE BUTTON
+        ========================= */
+
+        .delete-order-btn {
+            background-color: #dc2626;
+            color: white;
+        }
+
+        .delete-order-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            margin-top: 50px;
+
+            background-color: #111827;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .details-card,
+            .selected-card,
+            .success-card,
+            .orders-section {
+                padding: 18px;
+            }
+
+            .update-order-btn,
+            .delete-order-btn {
+                margin-top: 8px;
+                margin-right: 5px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <h1>
+            OneFi Marketplace
+        </h1>
+
+        <p>
+            Shop Products with Easy EMI Options
+        </p>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTAINER
+    ========================= -->
+
+    <div class="container">
+
+
+        <!-- =========================
+             PRODUCTS
+        ========================= -->
+
+        <div class="section-title">
+
+            <h2>
+                Available Products
+            </h2>
+
+            <p>
+                Select a product to view details
+                and EMI options.
+            </p>
+
+        </div>
+
+
+        <div
+            id="productContainer"
+            class="product-grid">
+
+            <p class="loading">
+                Loading products...
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             PRODUCT DETAILS
+        ========================= -->
+
+        <div id="productDetails"></div>
+
+
+        <!-- =========================
+             SELECTED EMI
+        ========================= -->
+
+        <div id="selectedEmi"></div>
+
+
+        <!-- =========================
+             ORDER SUCCESS
+        ========================= -->
+
+        <div id="orderSuccess"></div>
+
+
+        <!-- =========================
+             MY ORDERS
+        ========================= -->
+
+        <div class="orders-section">
+
+            <h2>
+                📦 My Orders
+            </h2>
+
+            <p>
+                View all your orders placed
+                through OneFi Marketplace.
+            </p>
+
+            <button
+                class="orders-btn"
+                onclick="loadOrders()">
+
+                View My Orders
+
+            </button>
+
+
+            <div id="ordersContainer"></div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <p>
+            © 2026 OneFi Marketplace
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        /* =========================
+           API URLs
+        ========================= */
+
+        const PRODUCT_API =
+            "/api/products";
+
+        const EMI_API =
+            "/api/emi-plans";
+
+        const ORDER_API =
+            "/orders";
+
+
+        /* =========================
+           GLOBAL VARIABLES
+        ========================= */
+
+        let currentProductId = null;
+
+        let currentProduct = null;
+
+        let selectedEmiId = null;
+
+        let selectedMonthlyEmi = null;
+
+        let selectedProcessingFee = null;
+
+
+        /* =========================
+           LOAD PRODUCTS
+        ========================= */
+
+        async function loadProducts() {
+
+            const container =
+                document.getElementById(
+                    "productContainer"
+                );
+
+
+            container.innerHTML =
+                "<p class='loading'>Loading products...</p>";
+
+
+            try {
+
+                const response =
+                    await fetch(PRODUCT_API);
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load products"
+                    );
+
+                }
+
+
+                const products =
+                    await response.json();
+
+
+                if (!products ||
+                    products.length === 0) {
+
+                    container.innerHTML =
+                        "<p>No products available.</p>";
+
+                    return;
+
+                }
+
+
+                container.innerHTML = "";
+
+
+                products.forEach(product => {
+
+                    container.innerHTML += `
+
+                        <div class="product-card">
+
+                            <h3>
+                                ${product.name}
+                            </h3>
+
+                            <p>
+                                <strong>
+                                    Brand:
+                                </strong>
+
+                                ${product.brand || "N/A"}
+                            </p>
+
+                            <p>
+                                <strong>
+                                    Category:
+                                </strong>
+
+                                ${product.category || "N/A"}
+                            </p>
+
+                            <p>
+                                ${product.description || ""}
+                            </p>
+
+                            <p class="price">
+                                ₹${product.price}
+                            </p>
+
+                            <p>
+                                <strong>
+                                    Stock:
+                                </strong>
+
+                                ${product.stock}
+                            </p>
+
+                            <button
+                                class="view-btn"
+                                onclick="
+                                    viewProduct(
+                                        ${product.id}
+                                    )
+                                ">
+
+                                View Details
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+                });
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                container.innerHTML = `
+
+                    <p class="error">
+                        Failed to load products.
+                    </p>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================
+           VIEW PRODUCT
+        ========================= */
+
+        async function viewProduct(id) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        PRODUCT_API + "/" + id
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Product not found"
+                    );
+
+                }
+
+
+                const product =
+                    await response.json();
+
+
+                currentProductId =
+                    product.id;
+
+                currentProduct =
+                    product;
+
+
+                selectedEmiId = null;
+
+                selectedMonthlyEmi = null;
+
+                selectedProcessingFee = null;
+
+
+                document.getElementById(
+                    "selectedEmi"
+                ).innerHTML = "";
+
+
+                document.getElementById(
+                    "orderSuccess"
+                ).innerHTML = "";
+
+
+                document.getElementById(
+                    "productDetails"
+                ).innerHTML = `
+
+                    <div class="details-card">
+
+                        <h2>
+                            ${product.name}
+                        </h2>
+
+                        <p>
+                            <strong>
+                                Product ID:
+                            </strong>
+
+                            ${product.id}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Brand:
+                            </strong>
+
+                            ${product.brand || "N/A"}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Category:
+                            </strong>
+
+                            ${product.category || "N/A"}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Description:
+                            </strong>
+
+                            ${product.description || "N/A"}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Price:
+                            </strong>
+
+                            ₹${product.price}
+                        </p>
+
+                        <p>
+                            <strong>
+                                Stock:
+                            </strong>
+
+                            ${product.stock}
+                        </p>
+
+
+                        <div class="emi-section">
+
+                            <h3>
+                                💳 Available EMI Plans
+                            </h3>
+
+                            <div id="emiContainer">
+
+                                <p class="loading">
+                                    Loading EMI plans...
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="close-btn"
+                            onclick="
+                                hideProductDetails()
+                            ">
+
+                            Close Details
+
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                await loadEmiPlans(
+                    product.id
+                );
+
+
+                document.getElementById(
+                    "productDetails"
+                ).scrollIntoView({
+                    behavior: "smooth"
+                });
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                document.getElementById(
+                    "productDetails"
+                ).innerHTML = `
+
+                    <p class="error">
+                        Failed to load product details.
+                    </p>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================
+           LOAD EMI PLANS
+        ========================= */
+
+        async function loadEmiPlans(
+            productId
+        ) {
+
+            const container =
+                document.getElementById(
+                    "emiContainer"
+                );
+
+
+            if (!container) {
+                return;
+            }
+
+
+            container.innerHTML =
+                "<p class='loading'>Loading EMI plans...</p>";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        EMI_API +
+                        "/product/" +
+                        productId
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load EMI plans"
+                    );
+
+                }
+
+
+                const plans =
+                    await response.json();
+
+
+                if (!plans ||
+                    plans.length === 0) {
+
+                    container.innerHTML =
+                        "<p>No EMI plans available.</p>";
+
+                    return;
+
+                }
+
+
+                container.innerHTML = "";
+
+
+                plans.forEach(plan => {
+
+                    container.innerHTML += `
+
+                        <div class="emi-card">
+
+                            <p>
+
+                                <strong>
+                                    EMI Plan ID:
+                                </strong>
+
+                                ${plan.id}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Tenure:
+                                </strong>
+
+                                ${plan.tenureMonths}
+                                Months
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Interest Rate:
+                                </strong>
+
+                                ${plan.interestRate}%
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Monthly EMI:
+                                </strong>
+
+                                ₹${plan.monthlyEmi}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Processing Fee:
+                                </strong>
+
+                                ₹${plan.processingFee}
+
+                            </p>
+
+
+                            <button
+                                class="select-emi-btn"
+                                onclick="
+                                    selectEmi(
+                                        ${plan.id},
+                                        ${plan.tenureMonths},
+                                        ${plan.monthlyEmi},
+                                        ${plan.processingFee}
+                                    )
+                                ">
+
+                                Select EMI
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+                });
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                container.innerHTML = `
+
+                    <p class="error">
+                        Failed to load EMI plans.
+                    </p>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================
+           SELECT EMI
+        ========================= */
+
+        function selectEmi(
+            emiId,
+            tenureMonths,
+            monthlyEmi,
+            processingFee
+        ) {
+
+            selectedEmiId =
+                emiId;
+
+            selectedMonthlyEmi =
+                monthlyEmi;
+
+            selectedProcessingFee =
+                processingFee;
+
+
+            document.getElementById(
+                "selectedEmi"
+            ).innerHTML = `
+
+                <div class="selected-card">
+
+                    <h2>
+                        ✅ EMI Plan Selected
+                    </h2>
+
+                    <p>
+
+                        <strong>
+                            EMI Plan ID:
+                        </strong>
+
+                        ${emiId}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Tenure:
+                        </strong>
+
+                        ${tenureMonths}
+                        Months
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Monthly EMI:
+                        </strong>
+
+                        ₹${monthlyEmi}
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Processing Fee:
+                        </strong>
+
+                        ₹${processingFee}
+
+                    </p>
+
+
+                    <button
+                        class="place-order-btn"
+                        onclick="
+                            placeOrder(
+                                ${emiId},
+                                ${monthlyEmi}
+                            )
+                        ">
+
+                        Place Order
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            document.getElementById(
+                "selectedEmi"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================
+           PLACE ORDER
+        ========================= */
+
+        async function placeOrder(
+            emiPlanId,
+            monthlyEmi
+        ) {
+
+            if (!currentProduct) {
+
+                alert(
+                    "Please select a product first."
+                );
+
+                return;
+
+            }
+
+
+            const orderBody = {
+
+                quantity: 1,
+
+                totalAmount:
+                    currentProduct.price,
+
+                status:
+                    "PENDING",
+
+                orderDate:
+                    new Date().toISOString(),
+
+                product: {
+
+                    id:
+                        currentProductId
+
+                },
+
+                emiPlan: {
+
+                    id:
+                        emiPlanId
+
+                }
+
+            };
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        ORDER_API,
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    orderBody
+                                )
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to place order"
+                    );
+
+                }
+
+
+                const order =
+                    await response.json();
+
+
+                document.getElementById(
+                    "orderSuccess"
+                ).innerHTML = `
+
+                    <div class="success-card">
+
+                        <h2>
+                            ✅ Order Placed Successfully!
+                        </h2>
+
+
+                        <p>
+
+                            <strong>
+                                Order ID:
+                            </strong>
+
+                            ${order.id}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Product:
+                            </strong>
+
+                            ${
+                                order.product
+                                    ? order.product.name
+                                    : currentProduct.name
+                            }
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Quantity:
+                            </strong>
+
+                            ${order.quantity}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Total Amount:
+                            </strong>
+
+                            ₹${order.totalAmount}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Monthly EMI:
+                            </strong>
+
+                            ₹${monthlyEmi}
+
+                        </p>
+
+
+                        <p>
+
+                            <strong>
+                                Status:
+                            </strong>
+
+                            ${order.status}
+
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                document.getElementById(
+                    "orderSuccess"
+                ).scrollIntoView({
+                    behavior: "smooth"
+                });
+
+
+                /*
+                 * Refresh My Orders
+                 */
+
+                loadOrders();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                document.getElementById(
+                    "orderSuccess"
+                ).innerHTML = `
+
+                    <div class="success-card">
+
+                        <h2 class="error">
+                            ❌ Failed to Place Order
+                        </h2>
+
+                        <p>
+                            Please try again.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================
+           HIDE PRODUCT DETAILS
+        ========================= */
+
+        function hideProductDetails() {
+
+            document.getElementById(
+                "productDetails"
+            ).innerHTML = "";
+
+
+            document.getElementById(
+                "selectedEmi"
+            ).innerHTML = "";
+
+
+            currentProductId =
+                null;
+
+            currentProduct =
+                null;
+
+            selectedEmiId =
+                null;
+
+            selectedMonthlyEmi =
+                null;
+
+            selectedProcessingFee =
+                null;
+
+        }
+
+
+        /* =========================
+           LOAD ALL ORDERS
+        ========================= */
+
+        async function loadOrders() {
+
+            const container =
+                document.getElementById(
+                    "ordersContainer"
+                );
+
+
+            container.innerHTML = `
+
+                <p class="loading">
+                    Loading orders...
+                </p>
+
+            `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        ORDER_API
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load orders"
+                    );
+
+                }
+
+
+                const orders =
+                    await response.json();
+
+
+                if (!orders ||
+                    orders.length === 0) {
+
+                    container.innerHTML = `
+
+                        <p>
+                            No orders found.
+                        </p>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                container.innerHTML = "";
+
+
+                orders.forEach(order => {
+
+
+                    const productName =
+                        order.product
+                            ? order.product.name
+                            : "N/A";
+
+
+                    const monthlyEmi =
+                        order.emiPlan
+                            ? order.emiPlan.monthlyEmi
+                            : "N/A";
+
+
+                    const tenure =
+                        order.emiPlan
+                            ? order.emiPlan.tenureMonths
+                            : "N/A";
+
+
+                    const interestRate =
+                        order.emiPlan
+                            ? order.emiPlan.interestRate
+                            : "N/A";
+
+
+                    const processingFee =
+                        order.emiPlan
+                            ? order.emiPlan.processingFee
+                            : "N/A";
+
+
+                    const emiPlanId =
+                        order.emiPlan
+                            ? order.emiPlan.id
+                            : "N/A";
+
+
+                    container.innerHTML += `
+
+                        <div class="order-card">
+
+                            <h3>
+                                Order #${order.id}
+                            </h3>
+
+
+                            <p>
+
+                                <strong>
+                                    Product:
+                                </strong>
+
+                                ${productName}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Quantity:
+                                </strong>
+
+                                ${order.quantity}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Total Amount:
+                                </strong>
+
+                                ₹${order.totalAmount}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    EMI Plan:
+                                </strong>
+
+                                ${emiPlanId}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Tenure:
+                                </strong>
+
+                                ${tenure}
+                                Months
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Interest Rate:
+                                </strong>
+
+                                ${interestRate}%
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Monthly EMI:
+                                </strong>
+
+                                ₹${monthlyEmi}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Processing Fee:
+                                </strong>
+
+                                ₹${processingFee}
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Status:
+                                </strong>
+
+                                <span class="order-status">
+                                    ${order.status}
+                                </span>
+
+                            </p>
+
+
+                            <p>
+
+                                <strong>
+                                    Order Date:
+                                </strong>
+
+                                ${order.orderDate}
+
+                            </p>
+
+
+                            <!-- ACTION BUTTONS -->
+
+                            <div
+                                style="
+                                    margin-top:20px;
+                                ">
+
+
+                                <button
+                                    class="update-order-btn"
+                                    onclick="
+                                        updateOrder(
+                                            ${order.id}
+                                        )
+                                    ">
+
+                                    Update Order
+
+                                </button>
+
+
+                                <button
+                                    class="delete-order-btn"
+                                    onclick="
+                                        deleteOrder(
+                                            ${order.id}
+                                        )
+                                    ">
+
+                                    Delete Order
+
+                                </button>
+
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                });
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                container.innerHTML = `
+
+                    <p class="error">
+                        Failed to load orders.
+                    </p>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================
+           UPDATE ORDER
+        ========================= */
+
+        async function updateOrder(
+            orderId
+        ) {
+
+            /*
+             * Get new quantity
+             */
+
+            const quantity =
+                prompt(
+                    "Enter new quantity:"
+                );
+
+
+            if (quantity === null) {
+                return;
+            }
+
+
+            if (
+                isNaN(quantity) ||
+                parseInt(quantity) <= 0
+            ) {
+
+                alert(
+                    "Please enter a valid quantity."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Get new total amount
+             */
+
+            const totalAmount =
+                prompt(
+                    "Enter new total amount:"
+                );
+
+
+            if (totalAmount === null) {
+                return;
+            }
+
+
+            if (
+                isNaN(totalAmount) ||
+                parseFloat(totalAmount) < 0
+            ) {
+
+                alert(
+                    "Please enter a valid amount."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * Get new status
+             */
+
+            const status =
+                prompt(
+                    "Enter order status:",
+                    "CONFIRMED"
+                );
+
+
+            if (status === null) {
+                return;
+            }
+
+
+            try {
+
+                /*
+                 * First get existing order
+                 */
+
+                const getResponse =
+                    await fetch(
+                        ORDER_API +
+                        "/" +
+                        orderId
+                    );
+
+
+                if (!getResponse.ok) {
+
+                    throw new Error(
+                        "Order not found"
+                    );
+
+                }
+
+
+                const existingOrder =
+                    await getResponse.json();
+
+
+                /*
+                 * Create updated order
+                 */
+
+                const orderBody = {
+
+                    quantity:
+                        parseInt(quantity),
+
+                    totalAmount:
+                        parseFloat(totalAmount),
+
+                    status:
+                        status,
+
+                    orderDate:
+                        existingOrder.orderDate,
+
+                    product:
+                        existingOrder.product
+                            ? {
+                                id:
+                                    existingOrder
+                                        .product
+                                        .id
+                            }
+                            : null,
+
+                    productVariant:
+                        existingOrder.productVariant
+                            ? {
+                                id:
+                                    existingOrder
+                                        .productVariant
+                                        .id
+                            }
+                            : null,
+
+                    emiPlan:
+                        existingOrder.emiPlan
+                            ? {
+                                id:
+                                    existingOrder
+                                        .emiPlan
+                                        .id
+                            }
+                            : null
+
+                };
+
+
+                /*
+                 * PUT request
+                 */
+
+                const response =
+                    await fetch(
+                        ORDER_API +
+                        "/" +
+                        orderId,
+                        {
+
+                            method:
+                                "PUT",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    orderBody
+                                )
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to update order"
+                    );
+
+                }
+
+
+                alert(
+                    "Order updated successfully!"
+                );
+
+
+                /*
+                 * Reload orders
+                 */
+
+                await loadOrders();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                alert(
+                    "Failed to update order."
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           DELETE ORDER
+        ========================= */
+
+        async function deleteOrder(
+            orderId
+        ) {
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to delete Order #" +
+                    orderId +
+                    "?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        ORDER_API +
+                        "/" +
+                        orderId,
+                        {
+
+                            method:
+                                "DELETE"
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to delete order"
+                    );
+
+                }
+
+
+                alert(
+                    "Order deleted successfully!"
+                );
+
+
+                /*
+                 * Reload orders
+                 */
+
+                await loadOrders();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                alert(
+                    "Failed to delete order."
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           INITIAL LOAD
+        ========================= */
+
+        loadProducts();
+
+    </script>
+
+
+</body>
+
+</html>

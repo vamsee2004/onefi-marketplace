@@ -32,9 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-### Local configuration ###
 application.properties
-*.log
-error.txt
-.env
 application-local.properties
+error.txt
+*.log
+.env
